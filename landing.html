@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundSnap- Music Player</title>
+  <link rel="icon" sizes="192x192" href="./icons/web-app-manifest-192x192.png">
+  <link rel="icon" sizes="512x512" href="./icons/web-app-manifest-512x512.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --primary-color: #a2e3f0;
+      --secondary-color: #2f8ee1;
+      --text-color: #ffffff;
+      --dark-text: #333333;
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --glass-shadow: rgba(31, 38, 135, 0.2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url('./images/bg0.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+      z-index: -1;
+    }
+    
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .logo span {
+      color: var(--primary-color);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin: 0 15px;
+    }
+    
+    nav ul li a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+    
+    .btn {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(240, 162, 194, 0.4);
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(240, 162, 194, 0.6);
+    }
+    
+    #hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 50px;
+    }
+    
+    .hero-content {
+      max-width: 600px;
+      padding: 30px;
+    }
+    
+    h1 {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 span {
+      color: var(--primary-color);
+    }
+    
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .demo-player {
+      width: 280px;
+      height: 480px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 8px 32px var(--glass-shadow);
+      transform: rotate(3deg);
+      transition: transform 0.5s ease;
+    }
+    
+    .demo-player:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+    
+    .demo-player img {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .features {
+      padding: 100px 50px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title:after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      border-radius: 2px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .feature-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    
+    .feature-card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .cta {
+      padding: 100px 50px;
+      text-align: center;
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('./images/background5.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    
+    .cta h2 {
+      font-size: 42px;
+      margin-bottom: 30px;
+    }
+    
+    footer {
+      padding: 50px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .social-links {
+      margin: 20px 0;
+    }
+    
+    .social-links a {
+      color: var(--text-color);
+      font-size: 24px;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--primary-color);
+    }
+    
+    .copyright {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 20px;
+    }
+    
+    /* Demo player elements */
+    .song-title {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-top: 15px;
+    }
+    
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      position: relative;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      width: 45%;
+      border-radius: 3px;
+    }
+    
+    .time-display {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .play-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 18px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .next-btn, .prev-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+    
+    .note-section {
+      width: 90%;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-size: 14px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      margin-top: 15px;
+    }
+    
+    /* Animation */
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(3deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(3deg);
+      }
+      100% {
+        transform: translateY(0) rotate(3deg);
+      }
+    }
+    
+    .demo-player {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+      }
+      
+      .hero-content {
+        margin-bottom: 50px;
+      }
+      
+      h1 {
+        font-size: 42px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 30px;
+      }
+      
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px 0;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      nav ul li {
+        margin: 15px 0;
+        text-align: center;
+      }
+      
+      #hamburger {
+        display: block;
+      }
+      
+      .hero {
+        padding: 0 30px;
+      }
+      
+      .features, .cta {
+        padding: 80px 30px;
+      }
+      
+      h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  
+  <header>
+    <div class="logo">Sound<span>Snap</span></div>
+    <nav>
+      <ul id="menu">
+        <li><a href="#features">Features</a></li>
+        <li><a href="hiw.html">How it Works</a></li>
+        <li><a href="aboutus.html">About</a></li>
+      </ul>
+      <div id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your Music, <span>Your Memories</span></h1>
+      <p>SoundSnap is more than just a music player. It's an experience that captures your moments and enhances them with the perfect soundtrack. Immerse yourself in a visual and auditory journey unlike any other.</p>
+      <a href="main2.html" class="btn">Start Listening</a>
+    </div>
+    <div class="hero-image">
+      <div class="demo-player">
+        <img src="images/vk (1).avif" alt="Album Art">
+        <div class="song-title">The Night We Met</div>
+        <div class="progress-container">
+          <div class="progress-bar"></div>
+        </div>
+        <div class="time-display">
+          <div class="current-time">1:47</div>
+          <div class="total-time">3:28</div>
+        </div>
+        <div class="controls">
+          <div class="prev-btn">⯇</div>
+          <div class="play-btn">||</div>
+          <div class="next-btn">⯈</div>
+        </div>
+        <div class="note-section">I am not the only traveler<br>Who has not repaid his debt</div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="features" id="features">
+    <h2 class="section-title">Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-image"></i>
+        </div>
+        <h3>Dynamic Visuals</h3>
+        <p>Every song changes the background to match its mood, creating a fully immersive experience.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-music"></i>
+        </div>
+        <h3>Curated Playlist</h3>
+        <p>Enjoy our handpicked collection of songs that take you on an emotional journey.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        <h3>Lyrical Moments</h3>
+        <p>Each song comes with its signature lyrics to help you connect with the music on a deeper level.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-list"></i>
+        </div>
+        <h3>Simple Controls</h3>
+        <p>Intuitive interface with easy navigation to focus on what matters most - the music.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3>Responsive Design</h3>
+        <p>Enjoy your music on any device with our adaptive layout that looks great everywhere.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-paint-brush"></i>
+        </div>
+        <h3>Modern Glass UI</h3>
+        <p>Sleek and minimalist design with glass morphism effect for a premium feel.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="cta">
+    <h2>Ready to Experience Your Music Differently?</h2>
+    <a href="main2.html" class="btn">Launch SoundSnap</a>
+  </section>
+  
+  <footer>
+    <div class="logo">Sound<span>Snap</span></div>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-spotify"></i></a>
+    </div>
+    <div class="copyright">© 2025 SoundSnap. All rights reserved.</div>
+  </footer>
+  
+  <script>
+    // Mobile menu toggle
+    document.getElementById('hamburger').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('active');
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        
+        // Close mobile menu if open
+        document.getElementById('menu').classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
