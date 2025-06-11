@@ -167,17 +167,22 @@
   font-weight: 600;
   color: white;
   text-decoration: none;
-  background: linear-gradient(to right, #a2e3f0, #2f8ee1);
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent glass */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 50px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
   z-index: 1000;
 }
 
 .back-button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px 4px rgba(255, 182, 193, 0.7); /* Glow effect */
+  background: rgba(255, 255, 255, 0.25); /* Slightly brighter on hover */
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.3); /* Soft white glow */
 }
+
 
 
   </style>
