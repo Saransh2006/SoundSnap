@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SoundSnap</title>
+  <title>POLAROID</title>
   <link rel="icon" sizes="192x192" href="./icons/web-app-manifest-192x192.png">
   <link rel="icon" sizes="512x512" href="./icons/web-app-manifest-512x512.png">
 
@@ -16,7 +16,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url('./default.jpg'); /* Default background image */
+      background-image: url('./images/default.jpg'); /* Default background image */
       background-size: cover;
       background-position: center;
       transition: background-image 0.5s ease; 
@@ -173,9 +173,11 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 1000;
 }
-   
 
-
+.back-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px 4px rgba(255, 182, 193, 0.7); /* Glow effect */
+}
 
 
   </style>
@@ -184,9 +186,9 @@
   <div id="app">
     <!-- Song 1 -->
     <div class="music-player song-container" id="song1">
-      <img src="vk (1).avif" alt="Album Art">
-      <div class="song-title">The Night We Met</div>
-      <audio id="audio1" src="The-Night-We-Met.mp3"></audio>
+      <img src="mess (1).png" alt="Album Art">
+      <div class="song-title">Sorry I messed up</div>
+      <audio id="audio1" src="songs/tenderness.mp3"></audio>
       <div class="progress-container" id="progress-container1">
         <div class="progress-bar" id="progress-bar1"></div>
       </div>
@@ -195,19 +197,18 @@
         <div class="total-time" id="total-time1">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn1"><</button>
+        <button class="prev-btn" id="prev-btn1">⯇</button>
         <button class="play-btn" id="play-btn1">▶</button>
-        <button class="next-btn" id="next-btn1">></button>
+        <button class="next-btn" id="next-btn1">⯈</button>
       </div>
-      <div class="note-section" id="note-section1">I am not the only traveler
-        Who has not repaid his debt</div>
+      <div class="note-section" id="note-section1">Send a voice note apology, an old candid photo, and a mellow track in the background. Let your emotions speak louder than texts.</div>
     </div>
 
     <!-- Song 2 -->
     <div class="music-player song-container" id="song2">
-      <img src="vk (1).jpg" alt="Album Art">
-      <div class="song-title">Cinnamon Girl</div>
-      <audio id="audio2" src="Lana-Del-Rey-Cinnamon-Girl-(RawPraise.ng).mp3"></audio>
+      <img src="bday.png" alt="Album Art">
+      <div class="song-title">Happy Birthday, idiot</div>
+      <audio id="audio2" src="songs/happy-birthday-342117.mp3"></audio>
       <div class="progress-container" id="progress-container2">
         <div class="progress-bar" id="progress-bar2"></div>
       </div>
@@ -216,18 +217,18 @@
         <div class="total-time" id="total-time2">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn2"><</button>
+        <button class="prev-btn" id="prev-btn2">⯇</button>
         <button class="play-btn" id="play-btn2">▶</button>
-        <button class="next-btn" id="next-btn2">></button>
+        <button class="next-btn" id="next-btn2">⯈</button>
       </div>
-      <div class="note-section" id="note-section2">I am not the only traveler Who has not repaid his debt</div>
+      <div class="note-section" id="note-section2">A goofy photo collage, your singing voice (off-key allowed 😅), and a fun track they love. Way better than a basic WhatsApp text.</div>
     </div>
 
     <!-- Song 3 -->
     <div class="music-player song-container" id="song3">
-      <img src="download.jpg" alt="Album Art">
-      <div class="song-title">Another Love</div>
-      <audio id="audio3" src="MuzBox_tom_odell_another_love_mp3_71750.mp3"></audio>
+      <img src="misss.png" alt="Album Art">
+      <div class="song-title">🥹 I Miss You</div>
+      <audio id="audio3" src="songs/scenery-of-memories-195693.mp3"></audio>
       <div class="progress-container" id="progress-container3">
         <div class="progress-bar" id="progress-bar3"></div>
       </div>
@@ -236,18 +237,18 @@
         <div class="total-time" id="total-time3">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn3"><</button>
+        <button class="prev-btn" id="prev-btn3">⯇</button>
         <button class="play-btn" id="play-btn3">▶</button>
-        <button class="next-btn" id="next-btn3">></button>
+        <button class="next-btn" id="next-btn3">⯈</button>
       </div>
-      <div class="note-section" id="note-section3">I am not the only traveler Who has not repaid his debt</div>
+      <div class="note-section" id="note-section3">For that friend who feels far even though they’re just a hostel away. Include your voice, a photo from better days, and a comforting track.</div>
     </div>
 
     <!-- Song 4 -->
     <div class="music-player song-container" id="song4">
-      <img src="vk (2).jpg" alt="Album Art">
-      <div class="song-title">Those Eyes</div>
-      <audio id="audio4" src="Those Eyes.mpeg.mp3"></audio>
+      <img src="doit (2).png" alt="Album Art">
+      <div class="song-title"> 📚You’ll Do Great Tomorrow!</div>
+      <audio id="audio4" src="songs/goinghigher.mp3"></audio>
       <div class="progress-container" id="progress-container4">
         <div class="progress-bar" id="progress-bar4"></div>
       </div>
@@ -256,19 +257,18 @@
         <div class="total-time" id="total-time4">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn4"><</button>
+        <button class="prev-btn" id="prev-btn4">⯇</button>
         <button class="play-btn" id="play-btn4">▶</button>
-        <button class="next-btn" id="next-btn4">></button>
+        <button class="next-btn" id="next-btn4">⯈</button>
       </div>
-      <div class="note-section" id="note-section4">'Cause all of the small things that you do
-        Are what remind me why I fell for you</div>
+      <div class="note-section" id="note-section4">'Pre-exam boost for your bestie. Add a motivational voice note, a memory from last semester, and their favorite chillbeat.</div>
     </div>
 
     <!-- Song 5 -->
     <div class="music-player song-container" id="song5">
-      <img src="/vk (1).jpg" alt="Album Art">
-      <div class="song-title">Wildflower</div>
-      <audio id="audio5" src="Wildflower.mpeg.mp3"></audio>
+      <img src="tfbt.png" alt="Album Art">
+      <div class="song-title">Thank You for Being There</div>
+      <audio id="audio5" src="songs/betterdays.mp3"></audio>
       <div class="progress-container" id="progress-container5">
         <div class="progress-bar" id="progress-bar5"></div>
       </div>
@@ -277,18 +277,18 @@
         <div class="total-time" id="total-time5">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn5"><</button>
+        <button class="prev-btn" id="prev-btn5">⯇</button>
         <button class="play-btn" id="play-btn5">▶</button>
-        <button class="next-btn" id="next-btn5">></button>
+        <button class="next-btn" id="next-btn5">⯈</button>
       </div>
-      <div class="note-section" id="note-section5">I am not the only traveler Who has not repaid his debt</div>
+      <div class="note-section" id="note-section5">When someone supported you in silence — this is your silent gift. Record a voice note you couldn’t say in person, add a calming track and a photo from the time they helped.</div>
     </div>
 
     <!-- Song 6 -->
     <div class="music-player song-container" id="song6">
-      <img src="vk (1).avif" alt="Album Art">
-      <div class="song-title">Tum Ho</div>
-      <audio id="audio6" src="Tum Ho Rockstar 128 Kbps.mp3"></audio>
+      <img src="sc.png" alt="Album Art">
+      <div class="song-title"> ❤️ Secret Crush Confession</div>
+      <audio id="audio6" src="songs/romantic-wedding-background-music-337990.mp3"></audio>
       <div class="progress-container" id="progress-container6">
         <div class="progress-bar" id="progress-bar6"></div>
       </div>
@@ -297,18 +297,18 @@
         <div class="total-time" id="total-time6">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn6"><</button>
+        <button class="prev-btn" id="prev-btn6">⯇</button>
         <button class="play-btn" id="play-btn6">▶</button>
-        <button class="next-btn" id="next-btn6">></button>
+        <button class="next-btn" id="next-btn6">⯈</button>
       </div>
-      <div class="note-section" id="note-section6">Kahin Se.. Kahin Ko.. Bhi Aao Bewajah Chale Poochhe Bina Kisi Se Hum Mile</div>
+      <div class="note-section" id="note-section6">Want to be low-key cute and mysterious? Voice note + polaroid pic + the lyrics that say what you can’t.</div>
     </div>
 
     <!-- Song 7 -->
     <div class="music-player song-container" id="song7">
-      <img src="Virat Kohli 2024 T20 World Cup HD Pictures.jpg" alt="Album Art">
-      <div class="song-title">Jo Tum Mere Ho</div>
-      <audio id="audio7" src="Jo Tum Mere Ho Anuv Jain 128 Kbps.mp3"></audio>
+      <img src="mental.png" alt="Album Art">
+      <div class="song-title">🧘‍♀️ Mental Health Check-In</div>
+      <audio id="audio7" src="songs/Clean Soul.mp3"></audio>
       <div class="progress-container" id="progress-container7">
         <div class="progress-bar" id="progress-bar7"></div>
       </div>
@@ -317,15 +317,15 @@
         <div class="total-time" id="total-time7">0:00</div>
       </div>
       <div class="controls">
-        <button class="prev-btn" id="prev-btn7"><</button>
+        <button class="prev-btn" id="prev-btn7">⯇</button>
         <button class="play-btn" id="play-btn7">▶</button>
-        <button class="next-btn" id="next-btn7">></button>
+        <button class="next-btn" id="next-btn7">⯈</button>
       </div>
-      <div class="note-section" id="note-section7">Aur aaoge, aise aaoge
-        Teri-meri kya ye raahein yoon judi hain?</div>
+      <div class="note-section" id="note-section7">Let your friend know you’re here. A gentle voice, a photo of a calm sunset, and lo-fi background beats. It’s not therapy, but it’s warmth.</div>
     </div>
-    <a href="index.html" class="back-button"><</a>
-   
+    <a href="index.html" class="back-button">Back</a>
+    
+
 
   </div>
 
@@ -337,11 +337,11 @@
     const backgrounds = [
       'url(./background3.png)', // Background for song 1
       'url(./background2.png)', // Background for song 2
-      'url(./background4.png)', // Background for song 3
-      'url(./background1.png)', // Background for song 4
+      'url(./background7.png)', // Background for song 3
+      'url(./background4.png)', // Background for song 4
       'url(./background5.png)', // Background for song 5
       'url(./background6.png)', // Background for song 6
-      'url(./background7.png)'  // Background for song 7
+      'url(./background8.jpeg)'  // Background for song 7
     ];
 
     // Function to format time in minutes:seconds
